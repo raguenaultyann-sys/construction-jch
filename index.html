@@ -1,246 +1,199 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JCH Construction - Neuville-de-Poitou</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --vert: #7FD700; --noir: #1a1a1a; --gris: #f5f5f5; }
-        body { font-family: 'Segoe UI', sans-serif; color: #333; }
-
-        header {
-            background: var(--noir);
-            padding: 0.8rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo img { height: 70px; width: auto; }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 1rem;
-            transition: color 0.3s;
-        }
-        nav a:hover { color: var(--vert); }
-
-        .hero {
-            height: 600px;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        .about { background: var(--gris); padding: 5rem 2rem; }
-        .about-inner { max-width: 1200px; margin: 0 auto; }
-        .about h2 { font-size: 2rem; color: var(--vert); margin-bottom: 2rem; text-transform: uppercase; }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
-        .about-text p { margin-bottom: 1rem; line-height: 1.8; color: #555; }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-        .stat-card { background: white; padding: 2rem; text-align: center; border-left: 4px solid var(--vert); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .stat-card h4 { font-size: 2.5rem; color: var(--vert); font-weight: bold; }
-        .stat-card p { color: #666; margin-top: 0.5rem; }
-
-        .services { padding: 5rem 2rem; background: white; }
-        .services h2 { font-size: 2rem; color: var(--vert); margin-bottom: 3rem; text-transform: uppercase; max-width: 1200px; margin-left: auto; margin-right: auto; }
-        .services-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .service-card { padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: center; border-top: 4px solid var(--vert); transition: transform 0.3s; }
-        .service-card:hover { transform: translateY(-8px); }
-        .service-card .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .service-card h3 { font-size: 1rem; margin-bottom: 0.8rem; }
-        .service-card p { color: #666; font-size: 0.9rem; line-height: 1.6; }
-
-        .realisations { padding: 5rem 2rem; background: var(--gris); }
-        .realisations-inner { max-width: 1200px; margin: 0 auto; }
-        .realisations h2 { font-size: 2rem; color: var(--vert); margin-bottom: 3rem; text-transform: uppercase; }
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
-        .gallery-item { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s; }
-        .gallery-item:hover { transform: translateY(-5px); }
-        .gallery-placeholder { width: 100%; height: 220px; background: #e8e8e8; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 0.5rem; color: #999; }
-        .gallery-placeholder span { font-size: 3rem; }
-        .gallery-placeholder p { font-size: 0.85rem; }
-        .gallery-content { padding: 1.5rem; }
-        .gallery-content h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-        .gallery-content p { color: #666; font-size: 0.9rem; margin-bottom: 1rem; }
-        .add-btn { background: var(--vert); color: var(--noir); padding: 0.6rem 1.2rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: all 0.3s; }
-        .add-btn:hover { background: #90EE90; }
-
-        .temoignages { padding: 5rem 2rem; background: white; }
-        .temoignages-inner { max-width: 1200px; margin: 0 auto; }
-        .temoignages h2 { font-size: 2rem; color: var(--vert); margin-bottom: 3rem; text-transform: uppercase; }
-        .temoignages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-        .temoignage-card { background: var(--gris); padding: 2rem; border-radius: 8px; border-left: 4px solid var(--vert); }
-        .stars { color: var(--vert); font-size: 1.3rem; margin-bottom: 1rem; }
-        .temoignage-card p { font-style: italic; color: #555; margin-bottom: 1.5rem; line-height: 1.7; }
-        .auteur { font-weight: bold; color: var(--noir); }
-
-        .contact { padding: 5rem 2rem; background: var(--gris); }
-        .contact-inner { max-width: 1200px; margin: 0 auto; }
-        .contact h2 { font-size: 2rem; color: var(--vert); margin-bottom: 3rem; text-transform: uppercase; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
-        .contact-info h3 { font-size: 1.3rem; margin-bottom: 1.5rem; }
-        .contact-info p { margin-bottom: 1rem; color: #555; line-height: 1.7; }
-        .contact-info strong { color: var(--vert); }
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; margin-bottom: 0.4rem; font-weight: bold; font-size: 0.9rem; }
-        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-family: inherit; font-size: 1rem; }
-        .form-group textarea { min-height: 130px; resize: vertical; }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--vert); }
-        .btn-submit { background: var(--vert); color: var(--noir); padding: 1rem 2.5rem; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1rem; width: 100%; transition: all 0.3s; }
-        .btn-submit:hover { background: #90EE90; transform: translateY(-2px); }
-
-        footer { background: var(--noir); color: white; padding: 2.5rem 2rem; text-align: center; }
-        footer p { margin-bottom: 0.5rem; color: #ccc; }
-        footer strong { color: var(--vert); }
-
-        @media (max-width: 900px) {
-            .services-grid { grid-template-columns: repeat(2, 1fr); }
-            .temoignages-grid { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 768px) {
-            header { flex-direction: column; gap: 1rem; padding: 1rem; }
-            nav a { margin-left: 0.8rem; font-size: 0.9rem; }
-            .hero { height: 350px; }
-            .about-grid { grid-template-columns: 1fr; }
-            .gallery { grid-template-columns: 1fr; }
-            .contact-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JCH Construction - Neuville-de-Poitou</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--vert:#7FD700;--noir:#1a1a1a;--gris:#f5f5f5}
+body{font-family:'Segoe UI',sans-serif;color:#333}
+header{background:var(--noir);padding:.8rem 3rem;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center}
+.logo img{height:65px;width:auto}
+nav a{color:white;text-decoration:none;margin-left:2rem;font-size:1rem;transition:color .3s;font-weight:500}
+nav a:hover{color:var(--vert)}
+.hero{height:600px;position:relative;overflow:hidden}
+.hero img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.about{background:var(--gris);padding:5rem 3rem}
+.about-inner{max-width:1200px;margin:0 auto}
+.about h2{font-size:2rem;color:var(--vert);margin-bottom:2.5rem;text-transform:uppercase;letter-spacing:2px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.about-text p{margin-bottom:1.2rem;line-height:1.9;color:#555}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.stat-card{background:white;padding:2rem 1rem;text-align:center;border-left:4px solid var(--vert);box-shadow:0 3px 15px rgba(0,0,0,.08)}
+.stat-card h4{font-size:2.5rem;color:var(--vert);font-weight:800}
+.stat-card p{color:#666;margin-top:.5rem;font-size:.9rem}
+.services{padding:5rem 3rem;background:white}
+.services-inner{max-width:1200px;margin:0 auto}
+.services h2{font-size:2rem;color:var(--vert);margin-bottom:3rem;text-transform:uppercase;letter-spacing:2px}
+.services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.service-card{padding:2rem 1.5rem;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,.08);text-align:center;border-top:4px solid var(--vert);transition:transform .3s}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 8px 30px rgba(127,215,0,.2)}
+.service-card .icon{font-size:2.5rem;margin-bottom:1rem}
+.service-card h3{font-size:1rem;margin-bottom:.8rem;color:var(--noir);font-weight:700}
+.service-card p{color:#666;font-size:.9rem;line-height:1.6}
+.realisations{padding:5rem 3rem;background:var(--gris)}
+.realisations-inner{max-width:1200px;margin:0 auto}
+.realisations h2{font-size:2rem;color:var(--vert);margin-bottom:3rem;text-transform:uppercase;letter-spacing:2px}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.gallery-item{background:white;border-radius:10px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:transform .3s}
+.gallery-item:hover{transform:translateY(-5px);box-shadow:0 8px 30px rgba(127,215,0,.2)}
+.gallery-placeholder{width:100%;height:230px;background:linear-gradient(135deg,#e8e8e8,#d0d0d0);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;color:#999}
+.gallery-placeholder span{font-size:3.5rem}
+.gallery-placeholder p{font-size:.9rem;font-weight:500}
+.gallery-content{padding:1.5rem}
+.gallery-content h3{margin-bottom:.5rem;font-size:1.1rem;color:var(--noir)}
+.gallery-content p{color:#666;font-size:.9rem;margin-bottom:1rem;line-height:1.6}
+.add-btn{background:var(--vert);color:var(--noir);padding:.6rem 1.4rem;border:none;border-radius:5px;cursor:pointer;font-weight:700;font-size:.9rem;transition:all .3s}
+.add-btn:hover{background:#90EE90;transform:translateY(-2px)}
+.temoignages{padding:5rem 3rem;background:white}
+.temoignages-inner{max-width:1200px;margin:0 auto}
+.temoignages h2{font-size:2rem;color:var(--vert);margin-bottom:3rem;text-transform:uppercase;letter-spacing:2px}
+.temoignages-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.temoignage-card{background:var(--gris);padding:2rem;border-radius:10px;border-left:4px solid var(--vert)}
+.stars{color:var(--vert);font-size:1.3rem;margin-bottom:1rem}
+.temoignage-card p{font-style:italic;color:#555;margin-bottom:1.5rem;line-height:1.8}
+.auteur{font-weight:700;color:var(--noir);font-size:.95rem}
+.contact{padding:5rem 3rem;background:var(--gris)}
+.contact-inner{max-width:1200px;margin:0 auto}
+.contact h2{font-size:2rem;color:var(--vert);margin-bottom:3rem;text-transform:uppercase;letter-spacing:2px}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+.contact-info h3{font-size:1.4rem;margin-bottom:1.5rem;color:var(--noir)}
+.contact-info p{margin-bottom:1rem;color:#555;line-height:1.8}
+.contact-info strong{color:var(--vert)}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;margin-bottom:.4rem;font-weight:600;font-size:.9rem;color:var(--noir)}
+.form-group input,.form-group textarea{width:100%;padding:.85rem;border:1.5px solid #ddd;border-radius:6px;font-family:inherit;font-size:1rem;transition:border .3s}
+.form-group textarea{min-height:130px;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--vert);box-shadow:0 0 0 3px rgba(127,215,0,.15)}
+.btn-submit{background:var(--vert);color:var(--noir);padding:1rem 2.5rem;border:none;border-radius:6px;cursor:pointer;font-weight:700;font-size:1rem;width:100%;transition:all .3s;letter-spacing:1px}
+.btn-submit:hover{background:#90EE90;transform:translateY(-2px);box-shadow:0 5px 15px rgba(127,215,0,.4)}
+footer{background:var(--noir);color:white;padding:3rem 2rem;text-align:center}
+footer p{margin-bottom:.5rem;color:#aaa}
+footer strong{color:var(--vert)}
+@media(max-width:1024px){.services-grid{grid-template-columns:repeat(2,1fr)}.temoignages-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){header{flex-direction:column;gap:1rem;padding:1rem}nav a{margin-left:.8rem;font-size:.9rem}.hero{height:350px}.about-grid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.temoignages-grid{grid-template-columns:1fr}.services-grid{grid-template-columns:1fr 1fr}}
+</style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">
-            <img src="" alt="JCH Construction">
-        </div>
-        <nav>
-            <a href="#accueil">Accueil</a>
-            <a href="#services">Services</a>
-            <a href="#realisations">Réalisations</a>
-            <a href="#about">À propos</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
+<header>
+<div class="logo">
+<img src="https://limova-bucket-v2.s3.eu-central-1.amazonaws.com/7c1d5b6f-915a-4fe4-9c1e-93020db1d107.PNG" alt="JCH Construction">
+</div>
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#services">Services</a>
+<a href="#realisations">Réalisations</a>
+<a href="#about">À propos</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
 
-    <section class="hero" id="accueil">
-        <img src="" alt="JCH Construction - Maison moderne">
-    </section>
+<section class="hero" id="accueil">
+<img src="https://limova-bucket-v2.s3.eu-central-1.amazonaws.com/611ceed6-5542-40f1-98ac-f0a94a3e7483.jpg" alt="JCH Construction">
+</section>
 
-    <section class="about" id="about">
-        <div class="about-inner">
-            <h2>À Propos</h2>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>Depuis plus de <strong>17 ans</strong>, JCH Construction à Neuville-de-Poitou réalise vos projets de construction, rénovation et agrandissement avec passion et expertise.</p>
-                    <p>Plus de <strong>500 projets uniques</strong> réalisés dans la Vienne. Notre équipe vous accompagne de A à Z, de la conception au suivi du chantier jusqu'à la livraison.</p>
-                    <p>Faire confiance à JCH Construction, c'est choisir <strong>l'excellence et la proximité</strong>.</p>
-                </div>
-                <div class="stats">
-                    <div class="stat-card"><h4>500+</h4><p>Projets réalisés</p></div>
-                    <div class="stat-card"><h4>17</h4><p>Ans d'expérience</p></div>
-                    <div class="stat-card"><h4>100%</h4><p>Clients satisfaits</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="about" id="about">
+<div class="about-inner">
+<h2>À Propos</h2>
+<div class="about-grid">
+<div class="about-text">
+<p>Depuis plus de <strong>17 ans</strong>, JCH Construction à Neuville-de-Poitou réalise vos projets de construction, rénovation et agrandissement avec passion et expertise.</p>
+<p>Plus de <strong>500 projets uniques</strong> réalisés dans la Vienne. Notre équipe vous accompagne de A à Z, de la conception au suivi du chantier jusqu'à la livraison.</p>
+<p>Faire confiance à JCH Construction, c'est choisir <strong>l'excellence et la proximité</strong>.</p>
+</div>
+<div class="stats">
+<div class="stat-card"><h4>500+</h4><p>Projets réalisés</p></div>
+<div class="stat-card"><h4>17</h4><p>Ans d'expérience</p></div>
+<div class="stat-card"><h4>100%</h4><p>Clients satisfaits</p></div>
+</div>
+</div>
+</div>
+</section>
 
-    <section class="services" id="services">
-        <h2>Nos Services</h2>
-        <div class="services-grid">
-            <div class="service-card"><div class="icon">🏠</div><h3>Construction Maisons</h3><p>Maisons contemporaines et traditionnelles, normes RE 2020, conception sur-mesure.</p></div>
-            <div class="service-card"><div class="icon">🔧</div><h3>Rénovation Complète</h3><p>Rénovation énergétique, modernisation de l'habitat ancien, mise aux normes.</p></div>
-            <div class="service-card"><div class="icon">📐</div><h3>Agrandissement</h3><p>Extensions latérales, surélevations, création de nouvelles pièces de vie.</p></div>
-            <div class="service-card"><div class="icon">🏢</div><h3>Bâtiments Professionnels</h3><p>Locaux commerciaux, cabinets médicaux, bureaux. Mise aux normes ERP.</p></div>
-        </div>
-    </section>
+<section class="services" id="services">
+<div class="services-inner">
+<h2>Nos Services</h2>
+<div class="services-grid">
+<div class="service-card"><div class="icon">🏠</div><h3>Construction Maisons</h3><p>Maisons contemporaines et traditionnelles, normes RE 2020, conception sur-mesure.</p></div>
+<div class="service-card"><div class="icon">🔧</div><h3>Rénovation Complète</h3><p>Rénovation énergétique, modernisation de l'habitat ancien, mise aux normes.</p></div>
+<div class="service-card"><div class="icon">📐</div><h3>Agrandissement</h3><p>Extensions latérales, surélevations, création de nouvelles pièces de vie.</p></div>
+<div class="service-card"><div class="icon">🏢</div><h3>Bâtiments Professionnels</h3><p>Locaux commerciaux, cabinets médicaux, bureaux. Mise aux normes ERP.</p></div>
+</div>
+</div>
+</section>
 
-    <section class="realisations" id="realisations">
-        <div class="realisations-inner">
-            <h2>Nos Réalisations</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <div class="gallery-placeholder"><span>🏠</span><p>Vos photos ici</p></div>
-                    <div class="gallery-content"><h3>Construction Maisons Neuves</h3><p>Maisons modernes et contemporaines, clés en main ou hors d'eau hors d'air.</p><button class="add-btn">+ Ajouter des photos</button></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder"><span>🔧</span><p>Vos photos ici</p></div>
-                    <div class="gallery-content"><h3>Rénovation Complète</h3><p>Avant/après spectaculaires, isolation, électrique, chauffage, salle de bain.</p><button class="add-btn">+ Ajouter des photos</button></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder"><span>📐</span><p>Vos photos ici</p></div>
-                    <div class="gallery-content"><h3>Agrandissement & Extension</h3><p>Extensions latérales, surélevations, création de nouvelles pièces de vie.</p><button class="add-btn">+ Ajouter des photos</button></div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-placeholder"><span>🏢</span><p>Vos photos ici</p></div>
-                    <div class="gallery-content"><h3>Bâtiments Professionnels</h3><p>Cabinets médicaux, locaux commerciaux, bureaux. Mise aux normes ERP.</p><button class="add-btn">+ Ajouter des photos</button></div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="realisations" id="realisations">
+<div class="realisations-inner">
+<h2>Nos Réalisations</h2>
+<div class="gallery">
+<div class="gallery-item">
+<div class="gallery-placeholder"><span>🏠</span><p>Vos photos ici</p></div>
+<div class="gallery-content"><h3>Construction Maisons Neuves</h3><p>Maisons modernes et contemporaines, clés en main ou hors d'eau hors d'air.</p><button class="add-btn">+ Ajouter des photos</button></div>
+</div>
+<div class="gallery-item">
+<div class="gallery-placeholder"><span>🔧</span><p>Vos photos ici</p></div>
+<div class="gallery-content"><h3>Rénovation Complète</h3><p>Avant/après spectaculaires, isolation, électrique, chauffage, salle de bain.</p><button class="add-btn">+ Ajouter des photos</button></div>
+</div>
+<div class="gallery-item">
+<div class="gallery-placeholder"><span>📐</span><p>Vos photos ici</p></div>
+<div class="gallery-content"><h3>Agrandissement & Extension</h3><p>Extensions latérales, surélevations, création de nouvelles pièces de vie.</p><button class="add-btn">+ Ajouter des photos</button></div>
+</div>
+<div class="gallery-item">
+<div class="gallery-placeholder"><span>🏢</span><p>Vos photos ici</p></div>
+<div class="gallery-content"><h3>Bâtiments Professionnels</h3><p>Cabinets médicaux, locaux commerciaux, bureaux. Mise aux normes ERP.</p><button class="add-btn">+ Ajouter des photos</button></div>
+</div>
+</div>
+</div>
+</section>
 
-    <section class="temoignages">
-        <div class="temoignages-inner">
-            <h2>Avis Clients</h2>
-            <div class="temoignages-grid">
-                <div class="temoignage-card"><div class="stars">★★★★★</div><p>"Nous avons fait appel à JCH Construction pour l'agrandissement de notre maison. Disponibilité, réactivité, ils connaissent parfaitement les spécificités locales."</p><div class="auteur">— Famille Dubois, Neuville-de-Poitou</div></div>
-                <div class="temoignage-card"><div class="stars">★★★★★</div><p>"Construction de notre maison neuve en 2023. JCH Construction nous a accompagnés de A à Z. Leur écoute et professionnalisme ont dépassé nos attentes."</p><div class="auteur">— M. et Mme Martin, Vouillé</div></div>
-                <div class="temoignage-card"><div class="stars">★★★★★</div><p>"Rénovation complète d'un immeuble d'investissement. JCH Construction a parfaitement géré ce projet complexe avec professionnalisme et rigueur."</p><div class="auteur">— Investisseur immobilier, Poitiers</div></div>
-            </div>
-        </div>
-    </section>
+<section class="temoignages">
+<div class="temoignages-inner">
+<h2>Avis Clients</h2>
+<div class="temoignages-grid">
+<div class="temoignage-card"><div class="stars">★★★★★</div><p>"Nous avons fait appel à JCH Construction pour l'agrandissement de notre maison. Disponibilité, réactivité, ils connaissent parfaitement les spécificités locales."</p><div class="auteur">— Famille Dubois, Neuville-de-Poitou</div></div>
+<div class="temoignage-card"><div class="stars">★★★★★</div><p>"Construction de notre maison neuve en 2023. JCH Construction nous a accompagnés de A à Z. Leur écoute et professionnalisme ont dépassé nos attentes."</p><div class="auteur">— M. et Mme Martin, Vouillé</div></div>
+<div class="temoignage-card"><div class="stars">★★★★★</div><p>"Rénovation complète d'un immeuble d'investissement. JCH Construction a parfaitement géré ce projet complexe avec professionnalisme et rigueur."</p><div class="auteur">— Investisseur immobilier, Poitiers</div></div>
+</div>
+</div>
+</section>
 
-    <section class="contact" id="contact">
-        <div class="contact-inner">
-            <h2>Créons votre projet !</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Contactez-nous</h3>
-                    <p>📞 <strong>05 16 83 10 52</strong></p>
-                    <p>✉️ <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="27545342574f46494e420955464052424946524b5367404a464e4b0944484a">[email&#160;protected]</a></strong></p>
-                    <p>📍 Neuville-de-Poitou, Vienne (86)</p>
-                    <p style="margin-top:1.5rem;">Disponibles du <strong>lundi au vendredi</strong>, de 8h à 18h pour répondre à toutes vos questions.</p>
-                </div>
-                <form id="contactForm" action="https://formspree.io/f/stephanie.raguenault@gmail.com" method="POST">
-                    <div class="form-group"><label>Nom complet *</label><input type="text" name="nom" required placeholder="Votre nom"></div>
-                    <div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="votre@email.com"></div>
-                    <div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="06 XX XX XX XX"></div>
-                    <div class="form-group"><label>Sujet *</label><input type="text" name="sujet" required placeholder="Construction, Rénovation..."></div>
-                    <div class="form-group"><label>Message *</label><textarea name="message" required placeholder="Décrivez votre projet..."></textarea></div>
-                    <button type="submit" class="btn-submit">📩 Envoyer le message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+<section class="contact" id="contact">
+<div class="contact-inner">
+<h2>Créons votre projet !</h2>
+<div class="contact-grid">
+<div class="contact-info">
+<h3>Contactez-nous</h3>
+<p>📞 <strong>05 16 83 10 52</strong></p>
+<p>✉️ <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c4f48594c545d525559124e5d5b4959525d4950487c5b515d5550125f5351">[email&#160;protected]</a></strong></p>
+<p>📍 Neuville-de-Poitou, Vienne (86)</p>
+<p style="margin-top:1.5rem">Disponibles du <strong>lundi au vendredi</strong>, de 8h à 18h.</p>
+</div>
+<form id="contactForm" action="https://formspree.io/f/stephanie.raguenault@gmail.com" method="POST">
+<div class="form-group"><label>Nom complet *</label><input type="text" name="nom" required placeholder="Votre nom"></div>
+<div class="form-group"><label>Email *</label><input type="email" name="email" required placeholder="votre@email.com"></div>
+<div class="form-group"><label>Téléphone</label><input type="tel" name="telephone" placeholder="06 XX XX XX XX"></div>
+<div class="form-group"><label>Sujet *</label><input type="text" name="sujet" required placeholder="Construction, Rénovation..."></div>
+<div class="form-group"><label>Message *</label><textarea name="message" required placeholder="Décrivez votre projet..."></textarea></div>
+<button type="submit" class="btn-submit">📩 Envoyer le message</button>
+</form>
+</div>
+</div>
+</section>
 
-    <footer>
-        <p><strong>JCH Construction</strong> — Neuville-de-Poitou, Vienne (86)</p>
-        <p>📞 05 16 83 10 52 | ✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fc8f88998c949d929599d28e9d9b8999929d899088bc9b919d9590d29f9391">[email&#160;protected]</a></p>
-        <p style="margin-top:1rem; font-size:0.85rem;">&copy; 2026 JCH Construction - Tous droits réservés</p>
-    </footer>
+<footer>
+<p><strong>JCH Construction</strong> — Neuville-de-Poitou, Vienne (86)</p>
+<p>📞 05 16 83 10 52 | ✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a9daddccd9c1c8c7c0cc87dbc8cedcccc7c8dcc5dde9cec4c8c0c587cac6c4">[email&#160;protected]</a></p>
+<p style="margin-top:1rem;font-size:.85rem">&copy; 2026 JCH Construction - Tous droits réservés</p>
+</footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', e => {
-                e.preventDefault();
-                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-        document.querySelectorAll('.add-btn').forEach(btn => {
-            btn.addEventListener('click', () => alert('Pour ajouter vos photos, contactez votre webmaster !'));
-        });
-        document.getElementById('contactForm').addEventListener('submit', function() {
-            setTimeout(() => alert('✅ Merci ! Votre message a été envoyé !'), 500);
-        });
-    </script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})})}); 
+document.querySelectorAll('.add-btn').forEach(btn=>{btn.addEventListener('click',()=>alert('Pour ajouter vos photos, uploadez-les sur GitHub dans le dossier images/'))});
+document.getElementById('contactForm').addEventListener('submit',function(){setTimeout(()=>alert('✅ Merci ! Votre message a été envoyé !'),500)});
+</script>
 </body>
 </html>
+        
+   
